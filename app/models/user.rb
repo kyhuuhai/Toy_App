@@ -1,5 +1,5 @@
 class User < ApplicationRecord
 	has_many :micropost
-	validates :name, presence: true    # Replace FILL_IN with the right code.
-  validates :email, presence: true    # Replace FILL_IN with the right code.
+	 validates :name,  presence: true, length: { maximum: 50 }
+  validates :email, presence: true, length: { maximum: 255 }
 end
