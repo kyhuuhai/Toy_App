@@ -14,7 +14,7 @@ group :development, :test do
   gem 'sqlite3', '1.3.11'
   gem 'byebug',  '9.0.0', platform: :mri
 end
-
+gem 'rails-controller-testing'
 group :development do
   gem 'web-console',           '3.1.1'
   gem 'listen',                '3.0.8'
