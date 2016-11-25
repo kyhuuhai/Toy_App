@@ -1,17 +1,18 @@
 bin:
   name: bin
-  email: bin@gmail.com
+  email: hai@gmai.com
   password_digest: <%= User.digest('password') %>
 
 archer:
   name: Sterling Archer
-  email: duchess@example.gov
+  email: 123123@gmail.com
   password_digest: <%= User.digest('password') %>
-
+  admin: true
 lana:
   name: Lana Kane
-  email: hands@example.gov
+  email: example@railstutorial.org
   password_digest: <%= User.digest('password') %>
+  admin: false
 
 malory:
   name: Malory Archer

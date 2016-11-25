@@ -7,6 +7,11 @@ class UserTest < ActiveSupport::TestCase
                       password: "foobar", password_confirmation: "foobar")
   end
 
+    def forget
+    update_attribute(:remember_digest, nil)
+  end
+
+  
   test "should be valid" do
     assert @user.valid?
   end
@@ -64,8 +69,6 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  def forget
-    update_attribute(:remember_digest, nil)
-  end
+  
   
 end

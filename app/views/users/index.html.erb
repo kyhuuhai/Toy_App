@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Users</h1>
-
+  <%= will_paginate %>
 <table>
   <thead>
     <tr>
@@ -12,18 +12,11 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <%=  render @users %>
   </tbody>
 </table>
 
 <br>
+  <%= will_paginate %>
 <%= link_to "Home" ,static_pages_home_path %>
 <%= link_to 'New User', new_user_path %>
