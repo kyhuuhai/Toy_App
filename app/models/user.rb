@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
-  
+  attr_accessor :remember_token, :activation_token
+  before_create :create_activation_digest
 	before_save { self.email = email.downcase }
 
 
@@ -31,7 +31,5 @@ class User < ApplicationRecord
   def authenticated?(remember_token)
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
-
-  
 
 end
