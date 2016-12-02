@@ -1,16 +1,18 @@
 class CommentsController < ApplicationController
-	before_action :set_comment, only: [:show, :edit, :update, :destroy]
+	before_action :set_comment , only: [:show, :edit, :update, :destroy]
+	before_action :get_Micropost
    before_action :logged_in_user, only: [:create, :destroy]
 
-   def show
-   end
+  	def show
+   	@comment = @micropost.comments.find(params[:id])
+  	end
 
-   def index
-   	@comments = Comment.all
-   end
+   	def index
+   	@comments = @microposts.comments
+   	end
 
-   def edit
-   end
+  	def edit
+   	end
 
 	def new
 	@comment = Comment.new
@@ -20,30 +22,34 @@ class CommentsController < ApplicationController
 	@comment = Comment.new
 	end
 
-   def update
-   end
+   	def update
+   	end
 
-   # POST /comments
-  # POST /comments.json
-   def create
-   	@comment = current_user.microposts.first.comments.build(comment_params)
+   	def create
+   	@comment = @micropost.comments.build(comment_params)
    	if @comment.save
+   		flash[:success] = "Comment Success!"
       redirect_to root_url
     else
       @feed_items = []
       render 'static_pages/home'
     end
-   end
+   	end
 
-   def destroy
-   end
+   	def destroy
+   	end
+
     private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_comment
       @comment = Comment.find(params[:id])
     end
 
     def comment_params
       params.require(:comment).permit(:content)
+    end
+
+    def get_Micropost
+    	@micropost = Micropost.find(params[:micropost_id])
     end
 end

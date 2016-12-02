@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	
+	root   'static_pages#home'
   get 'comments/comments'
   get 'sessions/new'
 
@@ -17,15 +17,18 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-
+  resources :users do
+  resources :microposts do
+    resources :comments
+  end
+end
   resources :microposts
   resources :users
   resources :account_activations, only: [:edit]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :comments
-  resources :microposts do
-    resources :comments
-  end
-  root   'static_pages#home'
+  
+
+  
 end

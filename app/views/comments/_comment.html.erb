@@ -1,0 +1,21 @@
+  <li>
+<% cm.each do |f| %>
+  <ul>
+  <%= link_to gravatar_for(current_user, size: 50), current_user %>
+  <span class="user"><%= link_to current_user.name, current_user.name %></span>
+  <span class="content">
+    <%= f.content %>
+  </span>
+  <span class="timestamp">
+    Commented <%= time_ago_in_words(f.created_at) %> ago.
+
+    <% if current_user?(f.micropost.user) %>
+      <%= link_to "Delete", f, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+
+</span>
+</ul>
+    <% end %>
+
+</li>
