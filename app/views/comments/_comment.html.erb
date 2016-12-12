@@ -2,7 +2,7 @@
 <% cm.each do |f| %>
   <ul>
   <%= link_to gravatar_for(current_user, size: 50), current_user %>
-  <span class="user"><%= link_to current_user.name, current_user.name %></span>
+  <span class="user"><%= link_to current_user.name, current_user %></span>
   <span class="content">
     <%= f.content %>
   </span>

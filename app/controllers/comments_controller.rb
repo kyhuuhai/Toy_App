@@ -28,8 +28,9 @@ class CommentsController < ApplicationController
    	def create
    	@comment = @micropost.comments.build(comment_params)
    	if @comment.save
+   		@user = @micropost.user
    		flash[:success] = "Comment Success!"
-      redirect_to root_url
+      redirect_to @user
     else
       @feed_items = []
       render 'static_pages/home'
@@ -52,4 +53,5 @@ class CommentsController < ApplicationController
     def get_Micropost
     	@micropost = Micropost.find(params[:micropost_id])
     end
+
 end
