@@ -1,21 +1,40 @@
   <li>
 <% cm.each do |f| %>
   <ul>
-  <%= link_to gravatar_for(current_user, size: 50), current_user %>
-  <span class="user"><%= link_to current_user.name, current_user %></span>
+  <%= link_to gravatar_for(f.user, size: 50), f.user %>
+  <span class="user"><%= link_to f.user.name, f.user %></span>
   <span class="content">
     <%= f.content %>
   </span>
   <span class="timestamp">
     Commented <%= time_ago_in_words(f.created_at) %> ago.
 
-    <% if current_user?(f.micropost.user) %>
-      <%= link_to "Delete", f, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+
+    <% if current_user?(f.user) %>
+      <%= form_for(f) do |c| %>
+          <div id="welcomeDiv"  style="display:none;">
+            <div class="field">
+              <%= c.text_area :content, placeholder: f.content %>
+            </div>
+             <%= c.submit "Edit", class: "btn btn-primary" %>
+          </div>
+    <input type="button" id="edit" value="Edit" />
+     <%= link_to "Delete", f, method: :delete, data: { confirm: "You sure?" } %>
+      <% end %>
     <% end %>
+
+
 
 </span>
 </ul>
     <% end %>
+<script type="text/javascript">
+$(document).ready(function(){
 
+$( "#edit" ).click(function() {
+  document.getElementById('welcomeDiv').style.display = "block";
+   document.getElementById('edit').style.display = "none";
+});
+});
+</script>
 </li>
