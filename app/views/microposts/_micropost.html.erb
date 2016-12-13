@@ -9,14 +9,23 @@
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
 
     <% if current_user?(micropost.user) %>
-      <%= link_to "Delete", micropost, method: :delete,
+      <%= form_for(micropost) do |c| %>
+          <div id="welcomeDiv"  style="display:none;">
+            <div class="field">
+              <%= c.text_area :content, placeholder: micropost.content %>
+            </div>
+             <%= c.submit "Edit", class: "btn btn-primary" %>
+          </div>
+        <input type="button" id="edit" value="Edit" />
+      <% end %>
+    <%= link_to "Delete", micropost, method: :delete,
                                        data: { confirm: "You sure?" } %>
     <% end %>
 
     <% if micropost.comments.any? %>
        <%= render partial: "comments/comment", locals: {cm: micropost.comments}  %>
     <% end %>
-
+    <% if  logged_in? %>
     <%= form_for([@user,micropost,Comment.new]) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <div class="field">
@@ -24,4 +33,15 @@
         </div>
         <%= f.submit "Comment", class: "btn btn-primary" %>
     <% end %>
+    <% end %>
 </li>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+$( "#edit" ).click(function() {
+  document.getElementById('welcomeDiv').style.display = "block";
+   document.getElementById('edit').style.display = "none";
+});
+});
+</script>
